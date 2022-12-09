@@ -28,7 +28,35 @@ const part1 = (rawInput) => {
 const part2 = (rawInput) => {
   const input = parseInput(rawInput)
 
-  return
+  let elfItems = []
+
+  const splitItemsByElf = input.split("\n\n")
+  splitItemsByElf.forEach((item) => {
+    let totalCaloriesAsStrings = item.split("\n")
+    let totalCaloriesAsNumbers = []
+    totalCaloriesAsStrings.forEach((item) =>
+      totalCaloriesAsNumbers.push(Number(item)),
+    )
+
+    const sumOfCalories = totalCaloriesAsNumbers.reduce(
+      (acc, currentValue) => acc + currentValue,
+    )
+    elfItems.push(sumOfCalories)
+  })
+
+  // sort array numerically
+  const sortByAscending = elfItems.sort(function compareNumbers(a, b) {
+    return a - b
+  })
+  // take top three numbers from array
+  const topThreeNums = sortByAscending.slice(-3)
+  // sum of top three numbers
+  const sumOfNums = topThreeNums.reduce(
+    (acc, currentValue) => acc + currentValue,
+    0,
+  )
+
+  return sumOfNums
 }
 
 const testInput = `
@@ -60,10 +88,10 @@ run({
   },
   part2: {
     tests: [
-      // {
-      //   input: ``,
-      //   expected: "",
-      // },
+      {
+        input: testInput,
+        expected: 45000,
+      },
     ],
     solution: part2,
   },
