@@ -48,7 +48,41 @@ const part1 = (rawInput) => {
 const part2 = (rawInput) => {
   const input = parseInput(rawInput)
 
-  return
+  const eachRound = input.split(/\r?\n/)
+
+  let arrayOfScores = []
+
+  eachRound.forEach((round) => {
+    let scoreTotal = 0
+    if (round === "A X") {
+      scoreTotal += 3
+    } else if (round === "A Y") {
+      scoreTotal += 4
+    } else if (round === "A Z") {
+      scoreTotal += 8
+    } else if (round === "B X") {
+      scoreTotal += 1
+    } else if (round === "B Y") {
+      scoreTotal += 5
+    } else if (round === "B Z") {
+      scoreTotal += 9
+    } else if (round === "C X") {
+      scoreTotal += 2
+    } else if (round === "C Y") {
+      scoreTotal += 6
+    } else if (round === "C Z") {
+      scoreTotal += 7
+    }
+    arrayOfScores.push(scoreTotal)
+    return
+  })
+
+  const finalScore = arrayOfScores.reduce(
+    (acc, currentScore) => acc + currentScore,
+    0,
+  )
+
+  return finalScore
 }
 
 const testInput = `
@@ -69,13 +103,13 @@ run({
   },
   part2: {
     tests: [
-      // {
-      //   input: ``,
-      //   expected: "",
-      // },
+      {
+        input: testInput,
+        expected: 12,
+      },
     ],
     solution: part2,
   },
   trimTestInputs: true,
-  onlyTests: true, // comment out this line to submit answer
+  // onlyTests: true, // comment out this line to submit answer
 })
