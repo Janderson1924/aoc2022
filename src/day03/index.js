@@ -4,49 +4,44 @@ const parseInput = (rawInput) => rawInput
 
 const part1 = (rawInput) => {
   const input = parseInput(rawInput)
+
   const rucksack = input.split("\n")
 
   let matchingChars = []
 
-  // use Array.find instead?
   rucksack.forEach((sack) => {
     const compartmentOne = sack.slice(0, sack.length / 2)
     const compartmentTwo = sack.slice(sack.length / 2, sack.length)
 
-    for (let i = 0; i < compartmentOne.length; i++) {
-      for (let e = 0; e < compartmentTwo.length; e++) {
-        if (compartmentOne.charAt(i) === compartmentTwo.charAt(e)) {
-          // remove? stopping loop from finding same letter twice
-          matchingChars.includes(compartmentOne.charAt(i))
-            ? null
-            : matchingChars.push(compartmentOne.charAt(i))
+    for (const charX of compartmentOne) {
+      for (const charY of compartmentTwo) {
+        if (charX === charY) {
+          return matchingChars.push(charX)
         }
       }
     }
-    return matchingChars
   })
 
-  console.log("matching chars", matchingChars)
+  // will hold numerical values for characters, according to the AoC puzzle
+  let adventValues = []
 
-  let AOCValues = [] // will hold numerical values for matching chars
-
-  // determines whether char is upper or lowercase
+  // determines whether character is upper or lowercase and subtracts from its ASCII value to give AoC Value
   matchingChars.forEach((char) => {
     if (char === char.toUpperCase()) {
-      char = char.charCodeAt(0) - 38 // subtracts from the ASCII value to give the AOC value - uppercase
-      AOCValues.push(char)
-    } else if (char === char.toLowerCase()) {
-      char = char.charCodeAt(0) - 96 // subtracts from the ASCII value to give the AOC value - lowercase
-      AOCValues.push(char)
+      char = char.charCodeAt(0) - 38
+      adventValues.push(char)
+    } else {
+      char = char.charCodeAt(0) - 96
+      adventValues.push(char)
     }
   })
-  console.log("values", AOCValues)
 
   // sum the final values and return
-  const sumOfChars = AOCValues.reduce((acc, currentVal) => acc + currentVal, 0)
-  console.log("sum", sumOfChars)
-
-  return sumOfChars
+  const sumOfValues = adventValues.reduce(
+    (acc, currentVal) => acc + currentVal,
+    0,
+  )
+  return sumOfValues
 }
 
 const part2 = (rawInput) => {
