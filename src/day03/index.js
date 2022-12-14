@@ -1,4 +1,5 @@
 import run from "aocrunner"
+import { chunk_ } from "@arrows/array"
 
 const parseInput = (rawInput) => rawInput
 
@@ -23,21 +24,21 @@ const part1 = (rawInput) => {
   })
 
   // will hold numerical values for characters, according to the AoC puzzle
-  let adventValues = []
+  let itemValues = []
 
   // determines whether character is upper or lowercase and subtracts from its ASCII value to give AoC Value
   matchingChars.forEach((char) => {
     if (char === char.toUpperCase()) {
       char = char.charCodeAt(0) - 38
-      adventValues.push(char)
+      itemValues.push(char)
     } else {
       char = char.charCodeAt(0) - 96
-      adventValues.push(char)
+      itemValues.push(char)
     }
   })
 
   // sum the final values and return
-  const sumOfValues = adventValues.reduce(
+  const sumOfValues = itemValues.reduce(
     (acc, currentVal) => acc + currentVal,
     0,
   )
@@ -47,7 +48,37 @@ const part1 = (rawInput) => {
 const part2 = (rawInput) => {
   const input = parseInput(rawInput)
 
-  return
+  const lines = input.split("\n")
+  const groups = chunk_(3, lines)
+
+  let matchingBadges = []
+
+  groups.forEach((group) => {
+    for (let charX of group[0]) {
+      for (let charY of group[1]) {
+        for (let charZ of group[2]) {
+          if (charX === charY && charX === charZ) {
+            return matchingBadges.push(charX)
+          }
+        }
+      }
+    }
+  })
+
+  let badgeValues = []
+
+  matchingBadges.forEach((badge) => {
+    if (badge === badge.toUpperCase()) {
+      badge = badge.charCodeAt(0) - 38
+      badgeValues.push(badge)
+    } else {
+      badge = badge.charCodeAt(0) - 96
+      badgeValues.push(badge)
+    }
+  })
+
+  const sumOfBadges = badgeValues.reduce((acc, val) => acc + val, 0)
+  return sumOfBadges
 }
 
 const testInput = `
@@ -71,10 +102,10 @@ run({
   },
   part2: {
     tests: [
-      // {
-      //   input: ``,
-      //   expected: "",
-      // },
+      {
+        input: testInput,
+        expected: 70,
+      },
     ],
     solution: part2,
   },

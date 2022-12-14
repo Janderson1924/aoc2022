@@ -2,6 +2,18 @@
 # yarn lockfile v1
 
 
+"@arrows/array@^1.4.1":
+  version "1.4.1"
+  resolved "https://registry.yarnpkg.com/@arrows/array/-/array-1.4.1.tgz#a6580a08cee219755ca9a8eb14e956d3c29a5508"
+  integrity sha512-MGYS8xi3c4tTy1ivhrVntFvufoNzje0PchjEz6G/SsWRgUKxL4tKwS6iPdO8vsaJYldagAeWMd5KRD0aX3Q39g==
+  dependencies:
+    "@arrows/composition" "^1.2.2"
+
+"@arrows/composition@^1.2.2":
+  version "1.2.2"
+  resolved "https://registry.yarnpkg.com/@arrows/composition/-/composition-1.2.2.tgz#d0a213cac8f8c36c1c75856a1e6ed940c27e9169"
+  integrity sha512-9fh1yHwrx32lundiB3SlZ/VwuStPB4QakPsSLrGJFH6rCXvdrd060ivAZ7/2vlqPnEjBkPRRXOcG1YOu19p2GQ==
+
 "@esbuild/android-arm@0.15.16":
   version "0.15.16"
   resolved "https://registry.yarnpkg.com/@esbuild/android-arm/-/android-arm-0.15.16.tgz#0642926178b15e3d1545efae6eee05c4f3451d15"
